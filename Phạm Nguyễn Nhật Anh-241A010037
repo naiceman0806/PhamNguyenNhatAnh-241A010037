@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập 23 - Đèn Kéo Quân & Netlify</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 8px;
+        }
+        .student-info {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 12px;
+        }
+        .links-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ff4b2b;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn-link:hover {
+            background: #ff416c;
+            transform: translateY(-2px);
+        }
+        .stage {
+            width: 100%;
+            max-width: 600px;
+            height: 380px;
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .lantern {
+            width: 180px;
+            height: 220px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spin 15s infinite linear;
+        }
+        .lantern.paused {
+            animation-play-state: paused;
+        }
+        .face {
+            position: absolute;
+            width: 180px;
+            height: 220px;
+            border: 3px solid rgba(255, 215, 0, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        .face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .face:nth-child(1) { transform: rotateY(0deg) translateZ(160px); }
+        .face:nth-child(2) { transform: rotateY(60deg) translateZ(160px); }
+        .face:nth-child(3) { transform: rotateY(120deg) translateZ(160px); }
+        .face:nth-child(4) { transform: rotateY(180deg) translateZ(160px); }
+        .face:nth-child(5) { transform: rotateY(240deg) translateZ(160px); }
+        .face:nth-child(6) { transform: rotateY(300deg) translateZ(160px); }
+
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        .instruction {
+            margin-top: 25px;
+            font-size: 0.95rem;
+            color: #dcdcdc;
+            text-align: center;
+            background: rgba(0,0,0,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>BÀI TẬP 23: ĐÈN KÉO QUÂN JAVASCRIPT</h1>
+        <div class="student-info">
+            Họ và tên: <strong>Nguyễn Văn A</strong> | MSSV: <strong>SV123456</strong>
+        </div>
+        <div class="links-container">
+            <a href="https://picsum.photos/800/600" target="_blank" class="btn-link">Kết quả Bài tập 22</a>
+        </div>
+    </header>
+
+    <div class="stage">
+        <div class="lantern" id="lantern">
+            <div class="face"><img src="https://picsum.photos/id/1015/300/400" alt="Hinh 1"></div>
+            <div class="face"><img src="https://picsum.photos/id/1025/300/400" alt="Hinh 2"></div>
+            <div class="face"><img src="https://picsum.photos/id/1035/300/400" alt="Hinh 3"></div>
+            <div class="face"><img src="https://picsum.photos/id/1045/300/400" alt="Hinh 4"></div>
+            <div class="face"><img src="https://picsum.photos/id/1055/300/400" alt="Hinh 5"></div>
+            <div class="face"><img src="https://picsum.photos/id/1065/300/400" alt="Hinh 6"></div>
+        </div>
+    </div>
+
+    <div class="instruction">
+        Rê chuột vào hình (hoặc chạm/giữ trên điện thoại) để dừng đèn kéo quân
+    </div>
+
+    <script>
+        const lantern = document.getElementById('lantern');
+
+        lantern.addEventListener('mouseenter', () => {
+            lantern.classList.add('paused');
+        });
+
+        lantern.addEventListener('mouseleave', () => {
+            lantern.classList.remove('paused');
+        });
+
+        lantern.addEventListener('touchstart', () => {
+            lantern.classList.add('paused');
+        }, { passive: true });
+
+        lantern.addEventListener('touchend', () => {
+            lantern.classList.remove('paused');
+        }, { passive: true });
+    </script>
+
+</body>
+</html>
